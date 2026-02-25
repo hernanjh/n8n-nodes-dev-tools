@@ -5,9 +5,8 @@ export async function transformBase64(
 	index: number,
 ): Promise<IDataObject> {
 	const mode = this.getNodeParameter('mode', index) as string;
-	const sourceType = this.getNodeParameter('sourceType', index) as string;
-
 	if (mode === 'encode') {
+		const sourceType = this.getNodeParameter('sourceType', index, 'text') as string;
 		if (sourceType === 'text') {
 			const value = this.getNodeParameter('value', index) as string;
 			return {
@@ -28,13 +27,29 @@ export async function transformBase64(
 		}
 	} else {
 		// Decode
+		// Decode
 		const value = this.getNodeParameter('value', index) as string;
+		const targetType = this.getNodeParameter('targetType', index, 'text') as string;
+		
 		try {
-			const decoded = Buffer.from(value, 'base64').toString('utf8');
-			return {
-				result: decoded,
-			};
-		} catch (error) {
+			const decodedBuffer = Buffer.from(value, 'base64');
+			
+			if (targetType === 'text') {
+				return {
+					result: decodedBuffer.toString('utf8'),
+				};
+			} else {
+				const binaryPropertyName = this.getNodeParameter('binaryPropertyName', index, 'data') as string;
+				const binaryData = await this.helpers.prepareBinaryData(decodedBuffer, 'decoded_file', 'application/octet-stream');
+				
+				return {
+					json: { success: true },
+					binary: {
+						[binaryPropertyName]: binaryData,
+					},
+				};
+			}
+		} catch {
 			throw new NodeOperationError(this.getNode(), 'Invalid base64 string provided.', { itemIndex: index });
 		}
 	}

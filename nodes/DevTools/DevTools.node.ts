@@ -209,6 +209,17 @@ export class DevTools implements INodeType {
 				default: 'text',
 			},
 			{
+				displayName: 'Target Type',
+				name: 'targetType',
+				type: 'options',
+				displayOptions: { show: { operation: ['base64'], mode: ['decode'] } },
+				options: [
+					{ name: 'Text', value: 'text' },
+					{ name: 'Binary File', value: 'binary' },
+				],
+				default: 'text',
+			},
+			{
 				displayName: 'Value',
 				name: 'value',
 				type: 'string',
@@ -220,8 +231,8 @@ export class DevTools implements INodeType {
 						operation: ['base64'],
 					},
 					hide: {
-						mode: ['encode'],
 						sourceType: ['binary'],
+						targetType: ['binary'],
 					},
 				},
 				default: '',
@@ -235,6 +246,19 @@ export class DevTools implements INodeType {
 						operation: ['base64'],
 						mode: ['encode'],
 						sourceType: ['binary'],
+					},
+				},
+				default: 'data',
+			},
+			{
+				displayName: 'Binary Property Name',
+				name: 'binaryPropertyName',
+				type: 'string',
+				displayOptions: { 
+					show: { 
+						operation: ['base64'],
+						mode: ['decode'],
+						targetType: ['binary'],
 					},
 				},
 				default: 'data',
