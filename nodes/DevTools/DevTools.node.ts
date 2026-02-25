@@ -419,7 +419,6 @@ export class DevTools implements INodeType {
 				name: 'token',
 				type: 'string',
 				typeOptions: {
-					password: true,
 					rows: 4,
 				},
 				displayOptions: { show: { operation: ['jwtDecode'] } },
