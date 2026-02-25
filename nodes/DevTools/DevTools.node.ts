@@ -34,13 +34,17 @@ export class DevTools implements INodeType {
 					{ name: 'Base64 Encoder/Decoder', value: 'base64' },
 					{ name: 'Hash Generator', value: 'hash' },
 					{ name: 'HTML to Text', value: 'htmlToText' },
+					{ name: 'JSON Schema Validator', value: 'jsonSchema' },
 					{ name: 'JWT Decoder', value: 'jwtDecode' },
 					{ name: 'Network Utilities', value: 'network' },
 					{ name: 'Password Generator', value: 'password' },
 					{ name: 'QR Generator', value: 'qrCode' },
+					{ name: 'Regex Named Extractor', value: 'regexExtract' },
 					{ name: 'String Transformer', value: 'stringOps' },
+					{ name: 'Text Diff', value: 'textDiff' },
 					{ name: 'Unique ID Generator', value: 'uniqueId' },
 					{ name: 'URL Encoder/Decoder', value: 'url' },
+					{ name: 'URL Parser', value: 'urlParser' },
 					{ name: 'XML <-> JSON', value: 'xmlJson' },
 				],
 				default: 'apiKey',
@@ -424,6 +428,96 @@ export class DevTools implements INodeType {
 				displayOptions: { show: { operation: ['jwtDecode'] } },
 				default: '',
 			},
+			// JSON Schema Validator Params
+			{
+				displayName: 'Data (JSON)',
+				name: 'data',
+				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
+				displayOptions: { show: { operation: ['jsonSchema'] } },
+				default: '',
+			},
+			{
+				displayName: 'Schema (JSON)',
+				name: 'schema',
+				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
+				displayOptions: { show: { operation: ['jsonSchema'] } },
+				default: '',
+			},
+			// URL Parser Params
+			{
+				displayName: 'URL',
+				name: 'url',
+				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
+				displayOptions: { show: { operation: ['urlParser'] } },
+				default: '',
+			},
+			// Regex Extra Params
+			{
+				displayName: 'Text',
+				name: 'text',
+				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
+				displayOptions: { show: { operation: ['regexExtract'] } },
+				default: '',
+			},
+			{
+				displayName: 'Regex',
+				name: 'regex',
+				type: 'string',
+				displayOptions: { show: { operation: ['regexExtract'] } },
+				placeholder: '(?<name>\\w+)',
+				default: '',
+			},
+			{
+				displayName: 'Global',
+				name: 'global',
+				type: 'boolean',
+				displayOptions: { show: { operation: ['regexExtract'] } },
+				default: false,
+			},
+			// Text Diff Params
+			{
+				displayName: 'Old Value',
+				name: 'oldValue',
+				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
+				displayOptions: { show: { operation: ['textDiff'] } },
+				default: '',
+			},
+			{
+				displayName: 'New Value',
+				name: 'newValue',
+				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
+				displayOptions: { show: { operation: ['textDiff'] } },
+				default: '',
+			},
+			{
+				displayName: 'Output Format',
+				name: 'outputFormat',
+				type: 'options',
+				displayOptions: { show: { operation: ['textDiff'] } },
+				options: [
+					{ name: 'Simple List', value: 'simpleList' },
+					{ name: 'HTML', value: 'html' },
+				],
+				default: 'simpleList',
+			},
 		],
 	};
 
@@ -475,6 +569,18 @@ export class DevTools implements INodeType {
 						break;
 					case 'jwtDecode':
 						responseData = await actions.decodeJwt.call(this, i);
+						break;
+					case 'jsonSchema':
+						responseData = await actions.validateJson.call(this, i);
+						break;
+					case 'urlParser':
+						responseData = await actions.parseUrl.call(this, i);
+						break;
+					case 'regexExtract':
+						responseData = await actions.regexExtract.call(this, i);
+						break;
+					case 'textDiff':
+						responseData = await actions.textDiff.call(this, i);
 						break;
 					default:
 						throw new NodeOperationError(this.getNode(), `The operation "${operation}" is not supported!`);

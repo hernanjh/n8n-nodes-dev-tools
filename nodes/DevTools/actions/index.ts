@@ -11,3 +11,7 @@ export * from './transformUrl';
 export * from './convertHtmlText';
 export * from './convertXmlJson';
 export * from './decodeJwt';
+export * from './parseUrl';
+export * from './regexExtract';
+export * from './textDiff';
+export * from './validateJson';

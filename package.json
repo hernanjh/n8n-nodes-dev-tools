@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-dev-tools",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"description": "Developer utility tools for n8n: Generators, converters, and transformers.",
 	"license": "MIT",
 	"homepage": "https://github.com/hernanjh/n8n-nodes-dev-tools",
@@ -41,6 +41,7 @@
 	"devDependencies": {
 		"@n8n/node-cli": "*",
 		"@types/bwip-js": "^3.2.3",
+		"@types/diff": "^7.0.2",
 		"@types/html-to-text": "^9.0.4",
 		"@types/node": "^25.1.0",
 		"@types/qrcode": "^1.5.6",
@@ -54,7 +55,9 @@
 		"n8n-workflow": "*"
 	},
 	"dependencies": {
+		"ajv": "^8.18.0",
 		"bwip-js": "^4.8.0",
+		"diff": "^8.0.3",
 		"html-to-text": "^9.0.5",
 		"ip-cidr": "^4.0.2",
 		"jwt-decode": "^4.0.0",
