@@ -32,9 +32,13 @@ export class DevTools implements INodeType {
 					{ name: 'API Key Generator', value: 'apiKey' },
 					{ name: 'Bar Code Generator', value: 'barCode' },
 					{ name: 'Base64 Encoder/Decoder', value: 'base64' },
+					{ name: 'Hash Generator', value: 'hash' },
 					{ name: 'HTML to Text', value: 'htmlToText' },
+					{ name: 'JWT Decoder', value: 'jwtDecode' },
+					{ name: 'Network Utilities', value: 'network' },
 					{ name: 'Password Generator', value: 'password' },
 					{ name: 'QR Generator', value: 'qrCode' },
+					{ name: 'String Transformer', value: 'stringOps' },
 					{ name: 'Unique ID Generator', value: 'uniqueId' },
 					{ name: 'URL Encoder/Decoder', value: 'url' },
 					{ name: 'XML <-> JSON', value: 'xmlJson' },
@@ -329,6 +333,98 @@ export class DevTools implements INodeType {
 				displayOptions: { show: { operation: ['xmlJson'] } },
 				default: '',
 			},
+			// Network Utils Params
+			{
+				displayName: 'Action',
+				name: 'networkAction',
+				type: 'options',
+				displayOptions: { show: { operation: ['network'] } },
+				options: [
+					{ name: 'IP in Range', value: 'ipInRange' },
+					{ name: 'Subnet Info', value: 'subnetInfo' },
+				],
+				default: 'ipInRange',
+			},
+			{
+				displayName: 'IP Address',
+				name: 'ip',
+				type: 'string',
+				displayOptions: {
+					show: {
+						operation: ['network'],
+						networkAction: ['ipInRange'],
+					},
+				},
+				default: '',
+			},
+			{
+				displayName: 'CIDR',
+				name: 'cidr',
+				type: 'string',
+				displayOptions: { show: { operation: ['network'] } },
+				placeholder: '192.168.1.0/24',
+				default: '',
+			},
+			// String Transformer Params
+			{
+				displayName: 'Action',
+				name: 'stringAction',
+				type: 'options',
+				displayOptions: { show: { operation: ['stringOps'] } },
+				options: [
+					{ name: 'Slugify', value: 'slugify' },
+					{ name: 'Title Case', value: 'titleCase' },
+					{ name: 'Camel Case', value: 'camelCase' },
+					{ name: 'Snake Case', value: 'snakeCase' },
+				],
+				default: 'slugify',
+			},
+			{
+				displayName: 'Value',
+				name: 'value',
+				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
+				displayOptions: { show: { operation: ['stringOps'] } },
+				default: '',
+			},
+			// Hash Generator Params
+			{
+				displayName: 'Algorithm',
+				name: 'algorithm',
+				type: 'options',
+				displayOptions: { show: { operation: ['hash'] } },
+				options: [
+					{ name: 'MD5', value: 'MD5' },
+					{ name: 'SHA1', value: 'SHA1' },
+					{ name: 'SHA256', value: 'SHA256' },
+					{ name: 'SHA512', value: 'SHA512' },
+				],
+				default: 'SHA256',
+			},
+			{
+				displayName: 'Value',
+				name: 'value',
+				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
+				displayOptions: { show: { operation: ['hash'] } },
+				default: '',
+			},
+			// JWT Decoder Params
+			{
+				displayName: 'Token',
+				name: 'token',
+				type: 'string',
+				typeOptions: {
+					password: true,
+					rows: 4,
+				},
+				displayOptions: { show: { operation: ['jwtDecode'] } },
+				default: '',
+			},
 		],
 	};
 
@@ -368,6 +464,18 @@ export class DevTools implements INodeType {
 						break;
 					case 'xmlJson':
 						responseData = await actions.convertXmlJson.call(this, i);
+						break;
+					case 'network':
+						responseData = await actions.networkUtils.call(this, i);
+						break;
+					case 'stringOps':
+						responseData = await actions.transformString.call(this, i);
+						break;
+					case 'hash':
+						responseData = await actions.generateHash.call(this, i);
+						break;
+					case 'jwtDecode':
+						responseData = await actions.decodeJwt.call(this, i);
 						break;
 					default:
 						throw new NodeOperationError(this.getNode(), `The operation "${operation}" is not supported!`);

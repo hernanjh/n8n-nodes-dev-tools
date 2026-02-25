@@ -55,6 +55,30 @@ Extracts clean, readable text from HTML content, removing tags while preserving 
 
 Fast bidirectional conversion between XML strings and JSON objects.
 
+### 10. Network Utilities
+
+IP range validation and Subnet info extraction.
+
+- **Actions**: IP in Range, Subnet Info (First/Last IP, Broadcast, Mask, Hosts Count).
+
+### 11. String Transformer
+
+Transform text with multiple case and URL-safe formats.
+
+- **Actions**: Slugify, Title Case, Camel Case, Snake Case.
+
+### 12. Hash Generator
+
+Generate cryptographic hashes.
+
+- **Algorithms**: MD5, SHA1, SHA256, SHA512.
+
+### 13. JWT Decoder
+
+Parse and view JWT payloads.
+
+- **Note**: Decodes without signature verification for debugging purposes.
+
 ## Installation
 
 Follow the [installation guide in the n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/installation/).
