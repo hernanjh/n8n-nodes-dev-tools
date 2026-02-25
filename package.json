@@ -1,0 +1,63 @@
+{
+	"name": "n8n-nodes-dev-tools",
+	"version": "0.1.0",
+	"description": "Developer utility tools for n8n: Generators, converters, and transformers.",
+	"license": "MIT",
+	"homepage": "https://github.com/hernanjh/n8n-nodes-dev-tools",
+	"keywords": [
+		"n8n-community-node-package",
+		"dev-tools",
+		"generator",
+		"converter"
+	],
+	"author": {
+		"name": "Hernan Hegykozi",
+		"email": "hernanjh@gmail.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/hernanjh/n8n-nodes-dev-tools.git"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "npm run build"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [],
+		"nodes": [
+			"dist/nodes/DevTools/DevTools.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "*",
+		"@types/bwip-js": "^3.2.3",
+		"@types/html-to-text": "^9.0.4",
+		"@types/node": "^25.1.0",
+		"@types/qrcode": "^1.5.6",
+		"@types/xml2js": "^0.4.14",
+		"eslint": "9.32.0",
+		"prettier": "3.6.2",
+		"release-it": "^19.0.4",
+		"typescript": "5.9.2"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	},
+	"dependencies": {
+		"bwip-js": "^4.8.0",
+		"html-to-text": "^9.0.5",
+		"nanoid": "^5.1.6",
+		"qrcode": "^1.5.4",
+		"xml2js": "^0.6.2"
+	}
+}
