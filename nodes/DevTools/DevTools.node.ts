@@ -232,7 +232,6 @@ export class DevTools implements INodeType {
 					},
 					hide: {
 						sourceType: ['binary'],
-						targetType: ['binary'],
 					},
 				},
 				default: '',
