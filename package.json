@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-dev-tools",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"description": "Developer utility tools for n8n: Generators, converters, and transformers.",
 	"license": "MIT",
 	"homepage": "https://github.com/hernanjh/n8n-nodes-dev-tools",

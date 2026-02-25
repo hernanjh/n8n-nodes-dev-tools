@@ -79,6 +79,30 @@ Parse and view JWT payloads.
 
 - **Note**: Decodes without signature verification for debugging purposes.
 
+### 14. JSON Schema Validator
+
+Validate JSON data against a JSON Schema standard.
+
+- **Logic**: Uses `ajv` for high-performance validation. Returns detailed error arrays.
+
+### 15. URL Parser
+
+Decompose URLs into their constituent parts.
+
+- **Output**: protocol, hostname, port, pathname, hash, and search parameters as a JSON object.
+
+### 16. Regex Named Extractor
+
+Extract data using Regular Expressions with Named Capture Groups.
+
+- **Features**: Supports global and single match modes.
+
+### 17. Text Diff
+
+Compare two strings and visualize changes.
+
+- **Formats**: Simple List (JSON array of changes) or HTML (with `<ins>` and `<del>` tags).
+
 ## Installation
 
 Follow the [installation guide in the n8n community nodes documentation](https://docs.n8n.io/integrations/community-nodes/installation/).
