@@ -14,7 +14,7 @@ export async function transformBase64(
 				result: Buffer.from(value).toString('base64'),
 			};
 		} else {
-			const binaryPropertyName = this.getNodeParameter('binaryPropertyName', index) as string;
+			const binaryPropertyName = this.getNodeParameter('binaryPropertyName', index, 'data') as string;
 			const item = this.getInputData()[index];
 
 			if (item.binary?.[binaryPropertyName] === undefined) {

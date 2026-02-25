@@ -25,7 +25,7 @@ export async function generateBarcode(
 			barcodeDataUri: `data:image/png;base64,${barcodeBuffer.toString('base64')}`,
 		};
 	} else {
-		const binaryPropertyName = this.getNodeParameter('binaryPropertyName', index) as string;
+		const binaryPropertyName = this.getNodeParameter('binaryPropertyName', index, 'data') as string;
 		const binaryData = await this.helpers.prepareBinaryData(barcodeBuffer, 'barcode.png', 'image/png');
 		
 		const binary: IBinaryKeyData = {};

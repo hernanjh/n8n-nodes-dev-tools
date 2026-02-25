@@ -14,6 +14,7 @@ export class DevTools implements INodeType {
 		name: 'devTools',
 		icon: 'file:DevTools.node.svg',
 		group: ['transform'],
+		usableAsTool: true,
 		version: 1,
 		description: 'A suite of utility tools for developers: Generators, converters, and transformers.',
 		defaults: {
@@ -108,6 +109,7 @@ export class DevTools implements INodeType {
 				displayName: 'Password',
 				name: 'password',
 				type: 'string',
+				typeOptions: { password: true },
 				displayOptions: { show: { operation: ['qrCode'], qrType: ['wifi'] } },
 				default: '',
 			},
@@ -222,8 +224,6 @@ export class DevTools implements INodeType {
 				displayOptions: { 
 					show: { 
 						operation: ['base64', 'qrCode', 'barCode'],
-						sourceType: ['binary'],
-						outputType: ['binary'],
 					} 
 				},
 				default: 'data',

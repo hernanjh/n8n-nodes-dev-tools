@@ -24,7 +24,7 @@ export async function generateQr(
 	} else {
 		// Binary file
 		const qrBuffer = await QRCode.toBuffer(textToEncode);
-		const binaryPropertyName = this.getNodeParameter('binaryPropertyName', index) as string;
+		const binaryPropertyName = this.getNodeParameter('binaryPropertyName', index, 'data') as string;
 		
 		const binaryData = await this.helpers.prepareBinaryData(qrBuffer, 'qrcode.png', 'image/png');
 		
