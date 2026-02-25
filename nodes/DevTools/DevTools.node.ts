@@ -95,6 +95,9 @@ export class DevTools implements INodeType {
 				displayName: 'Text',
 				name: 'text',
 				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
 				displayOptions: { show: { operation: ['qrCode'], qrType: ['text'] } },
 				default: '',
 			},
@@ -153,6 +156,9 @@ export class DevTools implements INodeType {
 				displayName: 'Text',
 				name: 'text',
 				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
 				displayOptions: { show: { operation: ['barCode'] } },
 				default: '',
 			},
@@ -206,6 +212,9 @@ export class DevTools implements INodeType {
 				displayName: 'Value',
 				name: 'value',
 				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
 				displayOptions: { 
 					show: { 
 						operation: ['base64'],
@@ -213,7 +222,7 @@ export class DevTools implements INodeType {
 					hide: {
 						mode: ['encode'],
 						sourceType: ['binary'],
-					}
+					},
 				},
 				default: '',
 			},
@@ -223,8 +232,22 @@ export class DevTools implements INodeType {
 				type: 'string',
 				displayOptions: { 
 					show: { 
-						operation: ['base64', 'qrCode', 'barCode'],
-					} 
+						operation: ['base64'],
+						mode: ['encode'],
+						sourceType: ['binary'],
+					},
+				},
+				default: 'data',
+			},
+			{
+				displayName: 'Binary Property Name',
+				name: 'binaryPropertyName',
+				type: 'string',
+				displayOptions: {
+					show: {
+						operation: ['qrCode', 'barCode'],
+						outputType: ['binary'],
+					},
 				},
 				default: 'data',
 			},
@@ -244,6 +267,9 @@ export class DevTools implements INodeType {
 				displayName: 'Value',
 				name: 'value',
 				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
 				displayOptions: { show: { operation: ['url'] } },
 				default: '',
 			},
@@ -252,6 +278,9 @@ export class DevTools implements INodeType {
 				displayName: 'HTML',
 				name: 'html',
 				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
 				displayOptions: { show: { operation: ['htmlToText'] } },
 				default: '',
 			},
@@ -271,6 +300,9 @@ export class DevTools implements INodeType {
 				displayName: 'Input Data',
 				name: 'inputData',
 				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
 				displayOptions: { show: { operation: ['xmlJson'] } },
 				default: '',
 			},
