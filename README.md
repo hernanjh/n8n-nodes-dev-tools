@@ -57,9 +57,9 @@ Fast bidirectional conversion between XML strings and JSON objects.
 
 ### 10. Network Utilities
 
-IP range validation and Subnet info extraction.
+IP range validation, subnet info extraction, and network diagnostics.
 
-- **Actions**: IP in Range, Subnet Info (First/Last IP, Broadcast, Mask, Hosts Count).
+- **Actions**: IP in Range, Subnet Info, Ping, DNS Resolve, TCP Port Check, Wake-on-LAN.
 
 ### 11. String Transformer
 

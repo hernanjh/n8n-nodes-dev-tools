@@ -344,8 +344,12 @@ export class DevTools implements INodeType {
 				type: 'options',
 				displayOptions: { show: { operation: ['network'] } },
 				options: [
+					{ name: 'DNS Resolve', value: 'dns' },
 					{ name: 'IP in Range', value: 'ipInRange' },
+					{ name: 'Ping', value: 'ping' },
 					{ name: 'Subnet Info', value: 'subnetInfo' },
+					{ name: 'TCP Port Check', value: 'tcpCheck' },
+					{ name: 'Wake on LAN', value: 'wol' },
 				],
 				default: 'ipInRange',
 			},
@@ -365,9 +369,109 @@ export class DevTools implements INodeType {
 				displayName: 'CIDR',
 				name: 'cidr',
 				type: 'string',
-				displayOptions: { show: { operation: ['network'] } },
+				displayOptions: { show: { operation: ['network'], networkAction: ['ipInRange', 'subnetInfo'] } },
 				placeholder: '192.168.1.0/24',
 				default: '',
+			},
+			{
+				displayName: 'Host / IP',
+				name: 'host',
+				type: 'string',
+				displayOptions: {
+					show: {
+						operation: ['network'],
+						networkAction: ['ping', 'tcpCheck'],
+					},
+				},
+				default: '',
+				description: 'Domain name or IP address',
+			},
+			{
+				displayName: 'Packets',
+				name: 'packets',
+				type: 'number',
+				displayOptions: {
+					show: {
+						operation: ['network'],
+						networkAction: ['ping'],
+					},
+				},
+				default: 3,
+				description: 'Number of packets to send',
+			},
+			{
+				displayName: 'Domain',
+				name: 'domain',
+				type: 'string',
+				displayOptions: {
+					show: {
+						operation: ['network'],
+						networkAction: ['dns'],
+					},
+				},
+				default: '',
+				description: 'Domain name to resolve',
+			},
+			{
+				displayName: 'Record Type',
+				name: 'recordType',
+				type: 'options',
+				displayOptions: {
+					show: {
+						operation: ['network'],
+						networkAction: ['dns'],
+					},
+				},
+				options: [
+					{ name: 'A', value: 'A' },
+					{ name: 'AAAA', value: 'AAAA' },
+					{ name: 'ANY', value: 'ANY' },
+					{ name: 'CNAME', value: 'CNAME' },
+					{ name: 'MX', value: 'MX' },
+					{ name: 'NS', value: 'NS' },
+					{ name: 'TXT', value: 'TXT' },
+				],
+				default: 'A',
+			},
+			{
+				displayName: 'Port',
+				name: 'port',
+				type: 'number',
+				displayOptions: {
+					show: {
+						operation: ['network'],
+						networkAction: ['tcpCheck'],
+					},
+				},
+				default: 80,
+				description: 'Port number to check',
+			},
+			{
+				displayName: 'Timeout (ms)',
+				name: 'timeout',
+				type: 'number',
+				displayOptions: {
+					show: {
+						operation: ['network'],
+						networkAction: ['tcpCheck'],
+					},
+				},
+				default: 3000,
+				description: 'Timeout in milliseconds',
+			},
+			{
+				displayName: 'MAC Address',
+				name: 'macAddress',
+				type: 'string',
+				displayOptions: {
+					show: {
+						operation: ['network'],
+						networkAction: ['wol'],
+					},
+				},
+				default: '',
+				placeholder: '00:1A:2B:3C:4D:5E',
+				description: 'MAC address of the target device',
 			},
 			// String Transformer Params
 			{
