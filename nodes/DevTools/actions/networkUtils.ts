@@ -18,30 +18,33 @@ export async function networkUtils(
 	index: number,
 ): Promise<IDataObject> {
 	const action = this.getNodeParameter('networkAction', index) as string;
-	const cidrInput = this.getNodeParameter('cidr', index) as string;
 
-	if (!IPCIDR.isValidCIDR(cidrInput)) {
-		throw new NodeOperationError(this.getNode(), `Invalid CIDR format: ${cidrInput}`, { itemIndex: index });
-	}
+	if (action === 'ipInRange' || action === 'subnetInfo') {
+		const cidrInput = this.getNodeParameter('cidr', index) as string;
 
-	const cidr = new IPCIDR(cidrInput);
+		if (!IPCIDR.isValidCIDR(cidrInput)) {
+			throw new NodeOperationError(this.getNode(), `Invalid CIDR format: ${cidrInput}`, { itemIndex: index });
+		}
 
-	if (action === 'ipInRange') {
-		const ip = this.getNodeParameter('ip', index) as string;
-		return {
-			contains: cidr.contains(ip),
-		};
-	} else if (action === 'subnetInfo') {
-		const start = cidr.start<string>();
-		const end = cidr.end<string>();
-		
-		return {
-			firstIp: start,
-			lastIp: end,
-			broadcast: (cidr.address as any).broadcast || '',
-			mask: (cidr.address as any).subnetMask || '',
-			hostsCount: cidr.size.toString(),
-		};
+		const cidr = new IPCIDR(cidrInput);
+
+		if (action === 'ipInRange') {
+			const ip = this.getNodeParameter('ip', index) as string;
+			return {
+				contains: cidr.contains(ip),
+			};
+		} else {
+			const start = cidr.start<string>();
+			const end = cidr.end<string>();
+			
+			return {
+				firstIp: start,
+				lastIp: end,
+				broadcast: (cidr.address as any).broadcast || '',
+				mask: (cidr.address as any).subnetMask || '',
+				hostsCount: cidr.size.toString(),
+			};
+		}
 	} else if (action === 'ping') {
 		const host = this.getNodeParameter('host', index) as string;
 		const packets = this.getNodeParameter('packets', index) as number;
